@@ -10,7 +10,8 @@
 1. Compilation:  
 javac -cp gson-2.13.1.jar -d out backend/*.java backend/cipher/*.java Main.java  
 2. Run:  
-java -cp out Main  
+java -cp "gson-2.13.1.jar;out" Main
+
 
 ## [ DEVELOPER'S NOTES ]  
 // 

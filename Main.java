@@ -70,43 +70,84 @@ public class Main {
 
         // start of game logic
         int problemNumber = 1;
+        int score = 0;
         
-        while (problemNumber <= problemCount) {
-            String randomString = null;
-            Cipher cipher = null;
-            String answer, solution;
+        while (true) {
+            while (problemNumber <= problemCount) {
+                String randomString = null;
+                Cipher cipher = null;
+                String answer, solution;
 
-            try {
-                randomString = Data.getRandomString(cipherName);
-                cipher = cipherList.get(cipherChoice).getDeclaredConstructor().newInstance();
-                
-                System.out.printf("[%s - Problem #%d]\n", cipherName, problemNumber++);
-            } catch (Exception e) {
-                e.printStackTrace();
+                try {
+                    randomString = Data.getRandomString(cipherName);
+                    cipher = cipherList.get(cipherChoice).getDeclaredConstructor().newInstance();
+                    
+                    Utility.clearScreen(10);
+                    System.out.printf("[%s - Problem #%d]\n", cipherName, problemNumber++);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (cipher == null || randomString == null) {
+                    System.err.println("Failed to initialize cipher or random string. Skipping this problem.");
+                    continue;
+                }
+
+                int currentProblemType = problemTypeChoice;
+
+                // if mixed, map to either 0 or 1 (decrypt/encrypt)
+                if (problemTypeChoice == 3) {
+                    int randomNumber = (int)Math.round(Math.random());
+                    currentProblemType = (randomNumber == 1) ? 1 : 2;
+                }
+
+                if (currentProblemType == 1) {
+                    // Decrypt
+                    String encrypted = cipher.encrypt(randomString);
+                    System.out.println("Encrypted: " + encrypted);
+                    System.out.print("Answer: ");
+                    answer = scanner.nextLine();
+                    solution = randomString;
+                } else {
+                    // Encrypt
+                    String decrypted = cipher.decrypt(randomString);
+                    System.out.println("Decrypted: " + decrypted);
+                    System.out.print("Answer: ");
+                    answer = scanner.nextLine();
+                    solution = randomString;
+                }
+
+                System.out.println("answer type: " + answer.getClass().getName());
+                System.out.println("solution type: " + solution.getClass().getName());
+
+                // check if answer is correct
+                if (answer.trim().equalsIgnoreCase(solution.trim())) {
+                    ++score;
+                    System.out.println("Correct! (+1 point)");
+                    Utility.delay(2);
+                } else {
+                    System.out.printf("Not quite... the answer is: %s\n", solution);
+                    Utility.delay(2);
+                }
             }
 
-            int currentProblemType = problemTypeChoice;
+            // show evaluation
+            Utility.clearScreen(10);
+            Utility.delayedDisplayLn("* ~ * ~ [ Evaluation ] ~ * ~ *", 0);
+            Utility.displayFormat('=', 30);
+            System.out.printf("Total Score: %d/%d\n", score, problemCount);
+            Utility.displayFormat('=', 30);
 
-            // if mixed, map to either 0 or 1 (decrypt/encrypt)
-            if (problemTypeChoice == 3) {
-                int randomNumber = (int)Math.round(Math.random());
-                currentProblemType = (randomNumber == 1) ? 1 : 2;
-            }
+            // prompt user whether to play again
+            System.out.print("Would you like to play again[y/n]?: ");
+            char userChoice = Data.getChar("");
 
-            if (currentProblemType == 1) {
-                // Decrypt
-                String encrypted = cipher.encrypt(randomString);
-                System.out.println("Encrypted: " + encrypted);
-                System.out.println("Answer: ");
-                answer = scanner.nextLine();
-                solution = randomString;
+            if (userChoice == 'y') {
+                problemNumber = 1;
+                score = 0;
+                continue;
             } else {
-                // Encrypt
-                String decrypted = cipher.decrypt(randomString);
-                System.out.println("Decrypted: " + decrypted);
-                System.out.println("Answer: ");
-                answer = scanner.nextLine();
-                solution = randomString; 
+                break;
             }
         }
     }
