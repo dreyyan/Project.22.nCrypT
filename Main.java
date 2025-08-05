@@ -1,14 +1,11 @@
+import backend.*;
+import backend.cipher.*;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
-import backend.*;
-import backend.cipher.*;
-
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-
     static Map<Integer, Class<? extends Cipher>> cipherList = new HashMap<>();
 
     static {
@@ -50,14 +47,18 @@ public class Main {
 
             System.out.printf("[%d] %s", counter++, cipherList.get(key).getSimpleName());
             System.out.println();
-        } Utility.displayFormat('=', 30);
+        }
+        
+        Utility.displayFormat('=', 30);
         counter = 1; // reset counter
         
         int cipherChoice = Data.getInt("Cipher: ", 1, 5);
         String cipherName = cipherList.get(cipherChoice).getSimpleName();
+        Utility.displayFormat('=', 30);
 
         // prompt user to enter # of problems
         int problemCount = Data.getInt("# of Problems(Max: 5): ", 1, 5);
+        Utility.displayFormat('=', 30);
 
         // prompt user to enter type of problem
         String[] problemType = { "Decrypt", "Encrypt", "Mixed" };
@@ -84,6 +85,7 @@ public class Main {
                     
                     Utility.clearScreen(10);
                     System.out.printf("[%s - Problem #%d]\n", cipherName, problemNumber++);
+                    Utility.displayFormat('#', 30);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -117,8 +119,7 @@ public class Main {
                     solution = randomString;
                 }
 
-                System.out.println("answer type: " + answer.getClass().getName());
-                System.out.println("solution type: " + solution.getClass().getName());
+                Utility.displayFormat('#', 30);
 
                 // check if answer is correct
                 if (answer.trim().equalsIgnoreCase(solution.trim())) {
@@ -180,22 +181,14 @@ public class Main {
             Utility.clearScreen(10);
 
             switch (userChoice) {
-                case 1:
-                    startGame();
-                    break;
-                case 2:
-                    displayAchievements();
-                    break;
-                case 3:
-                    displayStatistics();
-                    break;
-                case 4:
+                case 1 -> startGame();
+                case 2 -> displayAchievements();
+                case 3 -> displayStatistics();
+                case 4 -> {
                     Utility.delayedDisplay("exiting system...", 2);
                     System.exit(0);
-                    break;
-            }
-
-            Utility.pressEnterToContinue();
+                }
+            } Utility.pressEnterToContinue();
         }
     }
 }

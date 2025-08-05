@@ -1,10 +1,11 @@
 package backend.cipher;
 public class CaesarCipher implements Cipher {
-    private int shift;
+    final private int shift;
 
     public CaesarCipher() { this.shift = 3; } // Default Constructor
     public CaesarCipher(int shift) { this.shift = shift; } // Parameterized Constructor
 
+    @Override
     public String encrypt(String decryptedText) {
         StringBuilder encrypted = new StringBuilder();
 
@@ -19,6 +20,7 @@ public class CaesarCipher implements Cipher {
         return encrypted.toString();
     }
 
+    @Override
     public String decrypt(String encryptedText) {
         StringBuilder decrypted = new StringBuilder();
 
