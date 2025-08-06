@@ -1,0 +1,52 @@
+{
+    "001": {
+        "name": "Codebreaker I",
+        "description": "Successfully decoded your first message. Good job!",
+        "completed": false
+    },
+    "002": {
+        "name": "Codebreaker II",
+        "description": "Decoded 5 messages. Keep it up!",
+        "completed": false
+    },
+    "003": {
+        "name": "Codebreaker III",
+        "description": "Decoded 10 messages. You're doing great!",
+        "completed": false
+    },
+    "004": {
+        "name": "Codebreaker IV",
+        "description": "Decoded 25 messages. Awesome!",
+        "completed": false
+    },
+    "005": {
+        "name": "Codebreaker V",
+        "description": "Decoded 50 messages. Perfect!",
+        "completed": false
+    },
+    "006": {
+        "name": "Codebreaker VI",
+        "description": "Decoded 75 messages. Getting there...",
+        "completed": false
+    },
+    "007": {
+        "name": "Codebreaker VII",
+        "description": "Decoded 100 messages. Nice!",
+        "completed": false
+    },
+    "008": {
+        "name": "Codebreaker VIII",
+        "description": "Decoded 250 messages. Almost there!",
+        "completed": false
+    },
+    "009": {
+        "name": "Codebreaker IX",
+        "description": "Decoded 500 messages. One more stop!",
+        "completed": false
+    },
+    "010": {
+        "name": "Codebreaker X",
+        "description": "Decoded 1000 messages. A true cryptic god.",
+        "completed": false
+    }
+}

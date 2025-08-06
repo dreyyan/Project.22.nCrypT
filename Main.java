@@ -13,9 +13,9 @@ public class Main {
         // Substitution Ciphers
         cipherList.put(1, CaesarCipher.class);
         cipherList.put(2, Monoalphabetic.class);
-        /*cipherList.put(3, AtbashCipher.class);
+        cipherList.put(3, AtbashCipher.class);
         cipherList.put(4, KeywordCipher.class);
-        cipherList.put(5, PlayfairCipher.class);
+        /*cipherList.put(5, PlayfairCipher.class);
 
         // Transposition Ciphers
         cipherList.put(6, RailFenceCipher.class);
