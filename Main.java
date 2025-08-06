@@ -1,5 +1,6 @@
 import backend.*;
 import backend.cipher.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -11,8 +12,8 @@ public class Main {
     static {
         // Substitution Ciphers
         cipherList.put(1, CaesarCipher.class);
-/*         cipherList.put(2, Monoalphabetic.class);
-        cipherList.put(3, AtbashCipher.class);
+        cipherList.put(2, Monoalphabetic.class);
+        /*cipherList.put(3, AtbashCipher.class);
         cipherList.put(4, KeywordCipher.class);
         cipherList.put(5, PlayfairCipher.class);
 
@@ -30,7 +31,7 @@ public class Main {
         cipherList.put(12, AESCipher.class);
         cipherList.put(13, RSACipher.class);
         cipherList.put(14, DESCipher.class);
-        cipherList.put(15, BlowfishCipher.class) */;
+        cipherList.put(15, BlowfishCipher.class); */
     }
 
     public static void startGame() {
@@ -86,7 +87,7 @@ public class Main {
                     Utility.clearScreen(10);
                     System.out.printf("[%s - Problem #%d]\n", cipherName, problemNumber++);
                     Utility.displayFormat('#', 30);
-                } catch (Exception e) {
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
 
@@ -146,7 +147,6 @@ public class Main {
             if (userChoice == 'y') {
                 problemNumber = 1;
                 score = 0;
-                continue;
             } else {
                 break;
             }
@@ -165,7 +165,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int userChoice = 0;
+        int userChoice;
+
         while (true) {
             Utility.clearScreen(10);
             Utility.delayedDisplayLn("~ * ~ * ~ [ nCrypT ] ~ * ~ * ~", 0.1);

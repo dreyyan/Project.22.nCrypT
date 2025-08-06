@@ -30,7 +30,14 @@ public class Monoalphabetic implements Cipher {
         StringBuilder encrypted = new StringBuilder();
 
         for (int i = 0; i < decryptedText.length(); ++i) {
-            
+            char currentChar = decryptedText.charAt(i);
+            Character encryptedChar = characterMap.get(currentChar);
+
+            if (encryptedChar != null) {
+                encrypted.append(encryptedChar);
+            } else {
+                encrypted.append(currentChar);
+            }
         }
 
         return encrypted.toString();
@@ -39,6 +46,24 @@ public class Monoalphabetic implements Cipher {
     @Override
     public String decrypt(String encryptedText) {
         StringBuilder decrypted = new StringBuilder();
+
+        for (int i = 0; i < encryptedText.length(); ++i) {
+            char currentChar = encryptedText.charAt(i);
+            boolean charFound = false;
+
+            // check for the current encrypted character's decryption key
+            for (Map.Entry<Character, Character> entry : characterMap.entrySet()) {
+                if (entry.getValue() == currentChar) {
+                    decrypted.append(entry.getKey());
+                    charFound = true;
+                    break;
+                }
+            }
+
+            if (!charFound) {
+                decrypted.append(currentChar);
+            }
+        }
 
         return decrypted.toString();
     }
