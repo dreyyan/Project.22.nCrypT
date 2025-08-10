@@ -15,10 +15,12 @@ public class KeywordCipher implements Cipher {
         Set<Character> uniqueCharacters = new LinkedHashSet<>();
         for (int i = 0; i < keyword.length(); ++i) {
             uniqueCharacters.add(keyword.charAt(i));
-        } Queue<String> characters = uniqueCharacters.toQueue();
+        }
+        
+        Queue<Character> characters = new LinkedList<>(uniqueCharacters);
 
-        for (char original = 'a'; 'a' <= 'z'; ++original) {
-            map.put(original++, characters.dequeue());
+        for (char original = 'a'; original <= 'z'; ++original) {
+            map.put(original, characters.poll());
         }
 
         return map;

@@ -41,6 +41,7 @@ public class Main {
         // prompt user to enter cipher of choice
         int counter = 1;
 
+        // display list of available ciphers
         for (Integer key: cipherList.keySet()) {
             if (counter < 10) {
                 System.out.print(' ');
@@ -125,6 +126,9 @@ public class Main {
                 // check if answer is correct
                 if (answer.trim().equalsIgnoreCase(solution.trim())) {
                     ++score;
+
+                    // update statistics
+                    // updateStatistics("");
                     System.out.println("Correct! (+1 point)");
                     Utility.delay(2);
                 } else {

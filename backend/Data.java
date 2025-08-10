@@ -94,4 +94,7 @@ public class Data {
         return null;
     }
 
+    public static void updateStatistics(String key, int value) {
+        
+    }
 }
